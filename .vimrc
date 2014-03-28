@@ -157,3 +157,5 @@ nmap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 " from
 " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+let &colorcolumn=join(range(81,999),",")
