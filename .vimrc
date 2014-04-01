@@ -134,6 +134,8 @@ let g:ctrlp_max_height=25
 let g:ctrlp_match_window_bottom = 0
 let g:ctrlp_match_window_reversed = 0
 
+let g:vim_json_syntax_conceal = 0
+
 nnoremap <silent> <C-c> :noh<CR>
 nnoremap <silent> <C-k> :bdel<CR>
 nnoremap <BS> <C-^>
