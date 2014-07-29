@@ -18,46 +18,53 @@ set cpo&vim
 "=====[ Interface ]==========================================
 
 " Track vars after each cursor movement...
-au FileType * call TPV__maybe_enable()
-
-function! TPV__maybe_enable ()
-  if &filetype != 'perl'
-      augroup TrackVar
-          autocmd!
-      augroup END
-      return
-  endif
-
-  augroup TrackVar
-      autocmd!
-      au CursorMoved  <buffer>  call TPV_track_perl_var()
-      au CursorMovedI <buffer>  call TPV_track_perl_var()
-
-      au BufEnter     <buffer>  call TPV__setup()
-  augroup END
-endfunction
+augroup TrackVarGlobal
+    autocmd!
+    autocmd BufEnter *  call TPV__setup()
+    autocmd BufLeave *  call TPV__teardown()
+augroup END
 
 function! TPV__setup ()
-    " Remember how * was set up (if it was) and change it...
-    let b:old_star_map = maparg('*')
-    nmap <special> <buffer><silent> *   :let @/ = TPV_locate_perl_var()<CR>
+    " Set up autocommands...
 
-    " cv --> change variable...
-    nmap <special> <buffer>         cv  :call TPV_rename_perl_var('normal')<CR>
-    vmap <special> <buffer>         cv  :call TPV_rename_perl_var('visual')<CR>gv
+    if &filetype == 'perl' || expand("%:e") =~ '^\%(\.p[lm]\|\.t\)$'
+        augroup TrackVarBuffer
+            autocmd!
+            au CursorMoved  <buffer>  call TPV_track_perl_var()
+            au CursorMovedI <buffer>  call TPV_track_perl_var()
+        augroup END
 
-    " gd --> goto definition...
-    nmap <special> <buffer><silent> gd  :let @/ = TPV_locate_perl_var_decl()<CR>
+        " Remember how * was set up (if it was) and change it...
+        let b:old_star_map = maparg('*')
+        nmap <special> <buffer><silent> *   :let @/ = TPV_locate_perl_var()<CR>
 
-    " tt --> toggle tracking...
-    nmap <special> <buffer><silent> tt  :let g:track_perl_var_locked = ! g:track_perl_var_locked<CR>:call TPV_track_perl_var()<CR>
+        " cv --> change variable...
+        nmap <special> <buffer>         cv  :call TPV_rename_perl_var('normal')<CR>
+        vmap <special> <buffer>         cv  :call TPV_rename_perl_var('visual')<CR>gv
 
-    " Adjust keywords to cover sigils and qualifiers...
-    set iskeyword+=$
-    set iskeyword+=%
-    set iskeyword+=@-@
-    set iskeyword+=:
-    set iskeyword-=,
+        " gd --> goto definition...
+        nmap <special> <buffer><silent> gd  :let @/ = TPV_locate_perl_var_decl()<CR>
+
+        " tt --> toggle tracking...
+        nmap <special> <buffer><silent> tt  :let g:track_perl_var_locked = ! g:track_perl_var_locked<CR>:call TPV_track_perl_var()<CR>
+
+        " Adjust keywords to cover sigils and qualifiers...
+        setlocal iskeyword+=$
+        setlocal iskeyword+=%
+        setlocal iskeyword+=@-@
+        setlocal iskeyword+=:
+        setlocal iskeyword-=,
+
+    endif
+
+endfunction
+function! TPV__teardown ()
+
+    " Remove any active highlighting...
+    try
+        call matchdelete(s:match_id)
+    catch /./
+    endtry
 
 endfunction
 
@@ -104,6 +111,15 @@ let s:PUNCT_VAR_DESC = {
 \  '$.'                     :  'Line number of last input line',
 \  '$/'                     :  'Input record separator (end-of-line marker on inputs)',
 \  '$0'                     :  'Program name',
+\  '$1'                     :  'First captured substring from most recent regex match',
+\  '$2'                     :  'Second captured substring from most recent regex match',
+\  '$3'                     :  'Third captured substring from most recent regex match',
+\  '$4'                     :  'Fourth captured substring from most recent regex match',
+\  '$5'                     :  'Fifth captured substring from most recent regex match',
+\  '$6'                     :  'Sixth captured substring from most recent regex match',
+\  '$7'                     :  'Seventh captured substring from most recent regex match',
+\  '$8'                     :  'Eighth captured substring from most recent regex match',
+\  '$9'                     :  'Ninth captured substring from most recent regex match',
 \  '$:'                     :  'Break characters for format() lines',
 \  '$;'                     :  'Hash subscript separator for key concatenation',
 \  '$<'                     :  'Real uid of the current process',
@@ -178,9 +194,13 @@ let s:MATCH_VAR_PAT = join([
 \     '\)',
 \     '\s*',
 \     '\(',
+\         '\d\+',
+\     '\|',
 \         '\K\k*',
 \     '\|',
 \         '\^\K',
+\     '\|',
+\         '[{]\d\+[}]',
 \     '\|',
 \         '[{]\^\h\w*[}]',
 \     '\|',
@@ -253,6 +273,7 @@ function! TPV_track_perl_var ()
     endif
 
     " Special highlighting and descriptions for builtins...
+    echomsg '['.sigil.varname.']: ' . get(s:PUNCT_VAR_DESC, sigil.varname, '<none>')
     let desc = get(s:PUNCT_VAR_DESC, sigil.varname, '')
     if len(desc)
         highlight!      TRACK_PERL_VAR_ACTIVE   cterm=NONE
@@ -288,7 +309,7 @@ function! TPV_track_perl_var ()
 
         " Does this var have a descriptive comment???
         let new_message = 0
-        let decl_pat = '\C^[^#]*\%(my\|our\|state\).*\zs'.sigil.varname.'\%(\_$\|\W\@=\)'
+        let decl_pat = '\C^[^#]*\%(my\|our\|state\)\%(\s*([^)]*\|\s*\)\zs'.sigil.varname.'\%(\_$\|\W\@=\)'
         let decl_line_num = search(decl_pat, 'Wcbn')
         if decl_line_num   " Ugly nested if's to minimize computation per cursor move...
             let decl_line = getline(decl_line_num)
@@ -415,7 +436,7 @@ function! TPV_locate_perl_var_decl ()
     endif
 
     " Otherwise search backwards for the declaration and report the outcome...
-    let decl_pat = '\C^[^#]*\%(my\|our\|state\).*\zs'.sigil.varname.'\%(\_$\|\W\@=\)'
+    let decl_pat = '\C^[^#]*\%(my\|our\|state\)\%(\s*([^)]*\|\s*\)\zs'.sigil.varname.'\%(\_$\|\W\@=\)'
     if !search(decl_pat, 'Wbs')
         echohl WarningMsg
         echo "Can't find a declaration before this point"
