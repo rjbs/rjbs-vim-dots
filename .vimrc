@@ -32,7 +32,7 @@ set pastetoggle=<F2>     " F2 to toggle paste
 set popt=paper:letter    " better default paper size for my purposes
 set ruler                " display cursor position
 set showcmd              " show command-in-progress
-set shortmess=at         " shortens messages to avoid 'press a key' prompt 
+set shortmess=at         " shortens messages to avoid 'press a key' prompt
 set shiftwidth=2         " two spaces per sw
 set softtabstop=2        " make two spaces act like tabs
 set timeout              " allow keys to timeout
@@ -100,7 +100,7 @@ function ModifiedFlag()
 	endif
 endfunc
 
-set statusline=[%n]\ %{ModifiedFlag()}%f\ %=%h%r%w\ (%v,%l)\ %P\ 
+set statusline=[%n]\ %{ModifiedFlag()}%f\ %=%h%r%w\ (%v,%l)\ %P\
 
 """  set various script options
 " perl syntax
