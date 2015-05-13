@@ -3,34 +3,22 @@
 use strict;
 use warnings;
 use File::Spec::Functions qw<catfile catdir>;
-use Test::More tests => 4; # can we upgrade to 0.88 and use done_testing?
+use Test::More tests => 6; # can we upgrade to 0.88 and use done_testing?
 use Test::Differences;
-use Text::VimColor;
-
-# hack to work around a silly limitation in Text::VimColor,
-# will remove it when Text::VimColor has been patched
-{
-    package TrueHash;
-    use base 'Tie::StdHash';
-    sub EXISTS { return 1 };
-}
-tie %Text::VimColor::SYNTAX_TYPE, 'TrueHash';
+use Text::VimColor 0.25;
 
 my $lang = 'mason';
-my $syntax_file   = catfile('syntax', "$lang.vim");
-my $color_file    = catfile('t', 'define_all.vim');
+my $syntax_file = catfile('syntax', "$lang.vim");
 
 sub parse_string {
     my ($string, $scripts) = @_;
     my $syntax = Text::VimColor->new(
         string => $string,
-        vim_options => [
-            qw(-RXZ -i NONE -u NONE -U NONE -N -n), # for performance
-            '+set nomodeline',          # for performance
+        extra_vim_options => [
             '+set runtimepath=.',       # don't consider system runtime files
             @{ $scripts || [] },
             "+source $syntax_file",
-            "+source $color_file",      # all syntax classes should be defined
+            '+syn sync fromstart',
         ],
     );
     return $syntax->marked;
@@ -43,14 +31,14 @@ eq_or_diff
 MASON
     [
         [ Delimiter   => '<%method title>'  ],
-        [ masonMethod => 'Home'   ],
+        [ ''          => 'Home'   ],
         [ Delimiter   => '</%method>'    ],
         [ ''          => "\n<h1>"    ],
         [ Delimiter   => '<%perl>'  ],
         [ Statement   => "print" ],
-        [ masonPerl   => ' '  ],
+        [ ''          => ' '  ],
         [ String      => '"foobar"' ],
-        [ masonPerl   => ';'  ],
+        [ ''          => ';'  ],
         [ Delimiter   => "</%perl>" ],
         [ ''          => "</h1>\n"  ],
     ],
@@ -77,10 +65,9 @@ MASON
         [ Statement   => '=cut'     ],
         [ ''          => "\n"       ],
         [ Statement   => 'print'    ],
-        [ masonInit   => ' '        ],
+        [ ''          => ' '        ],
         [ String      => '"foo"'    ],
-        [ masonInit   => ';'        ],
-        [ ''          => "\n"       ],
+        [ ''          => ";\n"      ],
         [ Delimiter   => '</%init>' ],
         [ ''          => "\n"       ],
     ],
@@ -95,18 +82,15 @@ eq_or_diff
 MASON
     [
         [ Delimiter       => '%'],
-        [ masonLine       => ' '],
+        [ ''              => ' '],
         [ Conditional     => 'if'],
-        [ masonLine       => ' ('],
+        [ ''              => ' ('],
         [ Identifier      => '$boolean'],
-        [ masonLine       => ') '],
-        [ masonPerlBraces => '{'],
-        [ ''              => "\n<li>hello</li>\n"],
+        [ ''              => ") {\n<li>hello</li>\n"],
         [ Delimiter       => "%"],
-        [ masonLine       => ' }'],
-        [ ''              => "\n"],
+        [ ''              => " }\n"],
         [ Delimiter       => "<& SELF:header"],
-        [ masonComp       => ' '],
+        [ ''              => ' '],
         [ Delimiter       => "&>"],
         [ ''              => "\n"],
     ],
@@ -122,22 +106,92 @@ asdf
 MASON
     [
         [ Delimiter        => '<&| foo'],
-        [ masonComp        => ', '],
+        [ ''               => ', '],
         [ String           => 'bar'],
-        [ masonComp        => ' => '],
+        [ ''               => ' => '],
         [ Identifier       => '$baz'],
-        [ masonComp        => ' '],
+        [ ''               => ' '],
         [ Delimiter        => '&>'],
-        [ ''               => "\n"],
-        [ masonCompContent => "asdf"],
-        [ ''               => "\n"],
+        [ ''               => "\nasdf\n"],
         [ Delimiter        => "%"],
         [ Comment          => '# foo'],
-        [ ''               => "\n"],
-        [ masonCompContent => "<hlagh>"],
-        [ ''               => "\n"],
+        [ ''               => "\n<hlagh>\n"],
         [ Delimiter        => "</&>"],
         [ ''               => "\n"],
+    ],
+    'basic Template syntax';
+
+eq_or_diff
+    parse_string(<<'MASON'),
+% for my $t (qw{foo bar}) { # foo
+<div>
+% map { $_ => 'y' } qw(qa sa );
+MASON
+    [
+        [Delimiter  =>'%'],
+        [''         => ' '],
+        [Repeat     => 'for'],
+        [''         =>' '],
+        [Statement  => 'my'],
+        [''         => ' '],
+        [Identifier => '$t'],
+        [''         => ' ('],
+        [String     => 'qw{foo bar}'],
+        [''         => ') { '],
+        [Comment    => '# foo'],
+        [''         => "\n<div>\n"],
+        [Delimiter  => '%'],
+        [''         => ' '],
+        [Statement  => 'map'],
+        [''         => ' '],
+        [Statement  => '{'],
+        [''         => ' '],
+        [Identifier => '$_'],
+        [''         => ' => '],
+        [String     => '\'y\''],
+        [''         => ' '],
+        [Statement  => '}'],
+        [''         => ' '],
+        [String     => 'qw(qa sa )'],
+        [''         => ";\n"],
+    ],
+    'basic Template syntax';
+
+eq_or_diff
+    parse_string(<<'MASON'),
+<% # This is a single-line comment
+foo+2
+%>
+dsfsdf+2
+<html>
+<% # foo %>
+<%
+    # This is a
+    # multi-line comment
+%>
+MASON
+    [
+        [Delimiter => '<%'],
+        [''        => ' '],
+        [Comment   => '# This is a single-line comment'],
+        [''        => "\nfoo+"],
+        [Number    => 2],
+        [''        => "\n"],
+        [Delimiter => '%>'],
+        [''        => "\ndsfsdf+2\n<html>\n"],
+        [Delimiter => '<%'],
+        [''        => ' '],
+        [Comment   => '# foo '],
+        [Delimiter => '%>'],
+        [''        => "\n"],
+        [Delimiter => '<%'],
+        [''        => "\n    "],
+        [Comment   => '# This is a'],
+        [''        => "\n    "],
+        [Comment   => '# multi-line comment'],
+        [''        => "\n"],
+        [Delimiter => '%>'],
+        [''        => "\n"],
     ],
     'basic Template syntax';
 

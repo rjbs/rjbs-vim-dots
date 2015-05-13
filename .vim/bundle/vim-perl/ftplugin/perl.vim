@@ -77,11 +77,12 @@ endif
 "---------------------------------------------
 
 " Undo the stuff we changed.
-let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isf< kp< path<" .
+let b:undo_ftplugin = "setlocal fo< com< cms< inc< inex< def< isk< isf< kp< path<" .
 	    \	      " | unlet! b:browsefilter"
 
 " proper matching for matchit plugin
 let b:match_skip = 's:comment\|string\|perlQQ\|perlShellCommand\|perlHereDoc\|perlSubstitution\|perlTranslation\|perlMatch\|perlFormatField'
+let b:match_words = '\<if\>:\<elsif\>:\<else\>'
 
 " Restore the saved compatibility options.
 let &cpo = s:save_cpo
