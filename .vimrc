@@ -136,6 +136,8 @@ let g:ctrlp_match_window_reversed = 0
 
 let g:vim_json_syntax_conceal = 0
 
+let g:rust_recommended_style = 0
+
 nnoremap <silent> <C-c> :noh<CR>
 nnoremap <silent> <C-k> :bdel<CR>
 nnoremap <BS> <C-^>
