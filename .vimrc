@@ -108,6 +108,17 @@ set statusline=[%n]\ %{ModifiedFlag()}%f\ %=%h%r%w\ (%v,%l)\ %P\
 let perl_include_pod   = 1
 let perl_extended_vars = 1
 
+""" Airline Configuration
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+
+  let g:airline_left_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_symbols.branch = '⎇'
+  let g:airline_symbols.whitespace = 'Ξ'
+  let g:airline_powerline_fonts=0
+endif
+
 " perl_synwrite
 silent call system("perl -e0 -MVi::QuickFix=silent")
 let perl_synwrite_qf = ! v:shell_error   " use Vi::QuickFix if it can be used
