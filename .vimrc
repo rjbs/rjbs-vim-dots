@@ -170,6 +170,10 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+nnoremap <CR> G
+
+" I'm not sure about this yet.  It's not the mapping of v to expand, but the
+" fact that it seems to go character-word-paragraph, with no "line" in it.
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
