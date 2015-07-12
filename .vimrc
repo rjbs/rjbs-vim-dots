@@ -156,6 +156,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
 autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
+
+" TODO: have this put the cursor back where you started -- rjbs, 2015-07-12
 nmap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
 " from
