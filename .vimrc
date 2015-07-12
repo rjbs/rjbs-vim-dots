@@ -148,6 +148,9 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " cnoremap <expr> <cr> getcmdtype() == ':' ? "\n:noh\n" : "\n"
 
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+
 nnoremap <silent> <Left>  :bprev<CR>
 nnoremap <silent> <Right> :bnext<CR>
 
