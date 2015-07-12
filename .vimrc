@@ -160,6 +160,16 @@ highlight EOLWS ctermbg=red guibg=red
 " TODO: have this put the cursor back where you started -- rjbs, 2015-07-12
 nmap <leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
+" From http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 " from
 " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 autocmd BufReadPost fugitive://* set bufhidden=delete
