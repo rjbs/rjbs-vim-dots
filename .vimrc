@@ -117,6 +117,8 @@ if !exists('g:airline_symbols')
   let g:airline_symbols.branch = '⎇'
   let g:airline_symbols.whitespace = 'Ξ'
   let g:airline_powerline_fonts=0
+
+  let g:airline_theme="murmur"
 endif
 
 " perl_synwrite
