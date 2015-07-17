@@ -174,7 +174,8 @@ autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
 
 " TODO: have this put the cursor back where you started -- rjbs, 2015-07-12
-nmap \\w :%s/\s\+$//<CR>:let @/=''<CR>
+" TODO: do not correct "-- " sigdashes -- rjbs, 2015-07-17
+nmap \w :%s/\s\+$//<CR>:let @/=''<CR>
 
 " From http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
 nnoremap <Leader>o :CtrlP<CR>
