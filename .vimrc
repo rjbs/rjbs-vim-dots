@@ -140,7 +140,7 @@ if v:version >= 700
   let loaded_matchparen = 1
 endif
 
-let mapleader="\<Space>"
+let mapleader="\\"
 nmap <leader>u :silent GundoToggle<CR>
 
 let g:ctrlp_max_height=25
