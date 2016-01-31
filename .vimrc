@@ -199,3 +199,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 let &colorcolumn=join(range(81,999),",")
+
+let g:rust_recommended_style = 0
+
