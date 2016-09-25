@@ -92,7 +92,7 @@ endif
 
 """ configure status line
 
-function ModifiedFlag()
+function! ModifiedFlag()
 	if (&modified)
 		return "*"
 	else
