@@ -54,7 +54,7 @@ syntax on                   " enable syntax highlighting
 
 if has("win32")
 	let Tlist_Ctags_Cmd='C:\Progra~1\ctags\ctags.exe'
-	map <M-Space> :simalt ~<CR>
+	nnoremap <M-Space> :simalt ~<CR>
 elseif has("macunix")
 	" the Carbon clipboard is screwed up, and messes up newlines
 	set cb=
@@ -85,9 +85,9 @@ endif
 """ act more like a pager when invoked as one
 
 if ((v:progname == "view") || ($RJBS_IN_MAN == "1"))
-  nmap <Space> <PageDown>
-	nmap b       <PageUp>
-  nmap q       :q<CR>
+  nnoremap <Space> <PageDown>
+	nnoremap b       <PageUp>
+  nnoremap q       :q<CR>
 endif
 
 """ configure status line
@@ -178,24 +178,24 @@ highlight EOLWS ctermbg=red guibg=red
 
 " TODO: have this put the cursor back where you started -- rjbs, 2015-07-12
 " TODO: do not correct "-- " sigdashes -- rjbs, 2015-07-17
-nmap \w :%s/\s\+$//<CR>:let @/=''<CR>
+nnoremap <Leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
 " From http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vnoremap <Leader>y "+y
+vnoremap <Leader>d "+d
+nnoremap <Leader>p "+p
+nnoremap <Leader>P "+P
+vnoremap <Leader>p "+p
+vnoremap <Leader>P "+P
 
 nnoremap <CR> G
 
 " I'm not sure about this yet.  It's not the mapping of v to expand, but the
 " fact that it seems to go character-word-paragraph, with no "line" in it.
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+vnoremap v <Plug>(expand_region_expand)
+vnoremap <C-v> <Plug>(expand_region_shrink)
 
 " from
 " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
