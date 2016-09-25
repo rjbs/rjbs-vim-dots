@@ -142,7 +142,9 @@ if v:version >= 700
 endif
 
 let mapleader="\\"
-nmap <leader>u :silent GundoToggle<CR>
+nnoremap <leader>u :silent GundoToggle<CR>
+nnoremap <leader>ev :edit   ~/.../src/rjbs-vim-dots/.vimrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 let g:ctrlp_max_height=25
 let g:ctrlp_match_window_bottom = 0
