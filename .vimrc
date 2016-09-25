@@ -90,18 +90,6 @@ if ((v:progname == "view") || ($RJBS_IN_MAN == "1"))
   nnoremap q       :q<CR>
 endif
 
-""" configure status line
-
-function! ModifiedFlag()
-	if (&modified)
-		return "*"
-	else
-		return " "
-	endif
-endfunc
-
-set statusline=[%n]\ %{ModifiedFlag()}%f\ %=%h%r%w\ (%v,%l)\ %P\
-
 """  set various script options
 " perl syntax
 "let perl_fold=1         " allow perl folding
