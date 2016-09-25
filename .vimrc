@@ -45,7 +45,7 @@ set wildmode=longest:full,full " complete only as much as is common,
                                " then show menu
 
 filetype off
-call pathogen#infect()
+execute pathogen#infect()
 
 colorscheme manxome         " use my phat color scheme
 filetype plugin on          " use ftplugins, mostly for those in ~
