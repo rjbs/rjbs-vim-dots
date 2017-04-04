@@ -121,6 +121,7 @@ iabbr rnstar Rob N. ★
 
 dig xx 9792
 dig xy 9794
+dig x? 9893
 
 " version 7 things
 if v:version >= 700
