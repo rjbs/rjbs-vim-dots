@@ -117,7 +117,7 @@ let perl_synwrite_qf = ! v:shell_error   " use Vi::QuickFix if it can be used
 " diffthis | vs | enew | set buftype=nofile | r # | 1d |  diffthis
 
 iabbr --r -- rjbs, <C-R>=strftime("%Y-%m-%d")<CR>
-iabbr rnstar Rob N. ★
+iabbr rnstar Rob N ★
 
 dig xx 9792
 dig xy 9794
