@@ -110,8 +110,8 @@ if !exists('g:airline_symbols')
 endif
 
 " perl_synwrite
-silent call system("perl -e0 -MVi::QuickFix=silent")
-let perl_synwrite_qf = ! v:shell_error   " use Vi::QuickFix if it can be used
+" silent call system("perl -e0 -MVi::QuickFix=silent")
+let perl_synwrite_qf = 1
 
 " see changes
 " diffthis | vs | enew | set buftype=nofile | r # | 1d |  diffthis
