@@ -27,6 +27,7 @@ set hidden               " hide, don't close, undisplayed buffers
 set history=200          " more scrollback history
 set hlsearch             " highlight search matches (<C-c> to noh)
 set laststatus=2         " always show status line
+set listchars=tab:>-,eol:¬,trail:␠,extends:…,precedes:…,nbsp:␠
 set path=.,$HOME,,       " for editing with :find
 set pastetoggle=<F2>     " F2 to toggle paste
 set popt=paper:letter    " better default paper size for my purposes
