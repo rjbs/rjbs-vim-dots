@@ -54,11 +54,11 @@ runtime macros/matchit.vim  " pulled from macros dir to avoid requiring install
 syntax on                   " enable syntax highlighting
 
 if has("win32")
-	let Tlist_Ctags_Cmd='C:\Progra~1\ctags\ctags.exe'
-	nnoremap <M-Space> :simalt ~<CR>
+  let Tlist_Ctags_Cmd='C:\Progra~1\ctags\ctags.exe'
+  nnoremap <M-Space> :simalt ~<CR>
 elseif has("macunix")
-	" the Carbon clipboard is screwed up, and messes up newlines
-	set cb=
+  " the Carbon clipboard is screwed up, and messes up newlines
+  set cb=
 endif
 
 " exec'd because ... could it work otherwise?
@@ -73,21 +73,21 @@ endif
 """ use fonts that don't make my eyes bleed
 
 if has("gui_running")
-	if has("macunix")
-		set guifont=Monaco:h13
-		set noanti
-	elseif has("win32")
-		set guifont=ProFontWindows:h11:b:cANSI,Lucida_Console:h11:b:cANSI
-	elseif has("x11")
-		set guifont=-jmk-neep-bold-r-normal--15-*-*-*-*-*-*-*
-	endif
+  if has("macunix")
+    set guifont=Monaco:h13
+    set noanti
+  elseif has("win32")
+    set guifont=ProFontWindows:h11:b:cANSI,Lucida_Console:h11:b:cANSI
+  elseif has("x11")
+    set guifont=-jmk-neep-bold-r-normal--15-*-*-*-*-*-*-*
+  endif
 endif
 
 """ act more like a pager when invoked as one
 
 if ((v:progname == "view") || ($RJBS_IN_MAN == "1"))
   nnoremap <Space> <PageDown>
-	nnoremap b       <PageUp>
+  nnoremap b       <PageUp>
   nnoremap q       :q<CR>
 endif
 
