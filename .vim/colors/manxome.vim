@@ -44,6 +44,8 @@ highlight Todo      ctermfg=1 ctermbg=none  cterm=bold  guifg=#aa0000 guibg=#000
 highlight htmlBold    ctermfg=7 ctermbg=none  cterm=bold  guifg=#ffffff guibg=#000000 gui=none
 highlight htmlItalic  ctermfg=5 ctermbg=none  cterm=bold  guifg=#ff00ff guibg=#000000 gui=none
 
+highlight javaScriptParens ctermfg=6 ctermbg=none  cterm=bold  guifg=#00ffff guibg=#000000 gui=none
+
 if v:version >= 700
   highlight CursorColumn ctermbg=4 cterm=none
   highlight CursorLine   ctermbg=4 cterm=none
