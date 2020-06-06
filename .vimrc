@@ -46,7 +46,10 @@ set wildmode=longest:full,full " complete only as much as is common,
                                " then show menu
 
 filetype off
-execute pathogen#infect()
+
+if isdirectory($HOME . "/.vim/bundle")
+  execute pathogen#infect()
+endif
 
 colorscheme manxome         " use my phat color scheme
 filetype plugin on          " use ftplugins, mostly for those in ~
