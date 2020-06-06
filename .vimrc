@@ -1,6 +1,15 @@
 """ rjbs: Ricardo SIGNES
 """ vimrc
 
+if ! filereadable(expand('~/.vim/colors/manxome.vim'))
+  if ! isdirectory(expand('~/.vim/colors'))
+    call mkdir(expand('~/.vim/colors'))
+  endif
+  if isdirectory(expand('~/.vim/colors'))
+    silent call system("curl https://raw.githubusercontent.com/rjbs/rjbs-vim-dots/master/.vim/colors/manxome.vim > ~/.vim/colors/manxome.vim")
+  endif
+endif
+
 ""  set vim options
 set autoindent           " carry over indenting from previous line
 set backspace=2          " allow backspace beyond insertion point
