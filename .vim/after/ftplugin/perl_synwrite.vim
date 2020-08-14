@@ -3,7 +3,7 @@
 
 """ to make syntax checking happen automatically on write, set
 """ perl_synwrite_au; this is quirky, though, and isn't really advised
-""" failing that, this script will map :Write to act like :write, but 
+""" failing that, this script will map :Write to act like :write, but
 """ check syntax before writing;  :W[rite]! will write even if the syntax
 """ check fails
 
@@ -18,7 +18,7 @@
 
 "" abort if b:did_perl_synwrite is true: already loaded or user pref
 if exists("b:did_perl_synwrite")
-	finish
+  finish
 endif
 let b:did_perl_synwrite = 1
 
@@ -43,11 +43,11 @@ endfun
 function! s:PerlSynDo(do_anyway,do_command)
   let command = "!perl -c"
 
-	if (s:MostLocal("perl_synwrite_qf"))
+  if (s:MostLocal("perl_synwrite_qf"))
     " this env var tells Vi::QuickFix to replace "-" with actual filename
-		let $VI_QUICKFIX_SOURCEFILE=expand("%")
+    let $VI_QUICKFIX_SOURCEFILE=expand("%")
     let command = command . " -MVi::QuickFix=silent"
-	endif
+  endif
 
   " respect taint checking
   if (match(getline(1), "^#!.*perl.\\+-T") == 0)
@@ -60,20 +60,20 @@ function! s:PerlSynDo(do_anyway,do_command)
   " let to_exec = "write !" . command
   exec "write" command
 
-	silent! cgetfile " try to read the error file
-	if !v:shell_error || a:do_anyway
-		exec a:do_command
-		set nomod
-	endif
+  silent! cgetfile " try to read the error file
+  if !v:shell_error || a:do_anyway
+    exec a:do_command
+    set nomod
+  endif
 endfunction
 
 "" set up the autocommand, if b:perl_synwrite_au is true
 if (s:MostLocal("perl_synwrite_au") > 0)
-	let b:undo_ftplugin = "au! perl_synwrite * " . expand("%")
+  let b:undo_ftplugin = "au! perl_synwrite * " . expand("%")
 
-	augroup perl_synwrite
-		exec "au BufWriteCmd,FileWriteCmd " . expand("%") . " call s:PerlSynDo(0,\"write <afile>\")"
-	augroup END
+  augroup perl_synwrite
+    exec "au BufWriteCmd,FileWriteCmd " . expand("%") . " call s:PerlSynDo(0,\"write <afile>\")"
+  augroup END
 endif
 
 "" the :Write command
