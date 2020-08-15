@@ -56,9 +56,7 @@ set wildmode=longest:full,full " complete only as much as is common,
 
 filetype off
 
-if isdirectory($HOME . "/.vim/bundle")
-  execute pathogen#infect()
-endif
+execute pathogen#infect()
 
 colorscheme manxome         " use my phat color scheme
 filetype plugin on          " use ftplugins, mostly for those in ~
