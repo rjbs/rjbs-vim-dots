@@ -67,3 +67,6 @@
 [submodule ".vim/pack/git-plugins/start/ale"]
 	path = .vim/pack/git-plugins/start/ale
 	url = https://github.com/w0rp/ale.git
+[submodule ".vim/pack/github/start/vim-toml"]
+	path = .vim/pack/github/start/vim-toml
+	url = https://github.com/cespare/vim-toml
