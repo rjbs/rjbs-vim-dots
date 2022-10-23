@@ -190,7 +190,23 @@ nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 vnoremap <Leader>P "+P
 
-nnoremap <CR> G
+function MaybeOpenLinear()
+  normal ml
+  normal "lyiW
+  normal `l
+
+  let l:word = substitute(getreg('l'), ':', '', '')
+  if match(l:word, '\c[A-Z]\{3,4\}-[0-9]\+') > -1
+    echo(l:word)
+    if has('macunix')
+      silent call system('open https://linear.app/fastmail/issue/' . l:word)
+    else
+      echo 'open https://linear.app/fastmail/issue/' . l:word
+    endif
+  endif
+endfunction
+
+nnoremap <silent> <CR> :call MaybeOpenLinear()<CR>
 
 " I'm not sure about this yet.  It's not the mapping of v to expand, but the
 " fact that it seems to go character-word-paragraph, with no "line" in it.
