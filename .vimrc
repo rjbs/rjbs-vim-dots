@@ -154,11 +154,24 @@ let g:vim_json_syntax_conceal = 0
 
 let g:rust_recommended_style = 0
 
+" C-c to clear the highlight, which is good for when you just seached, say, a
+" single space!
 nnoremap <silent> <C-c> :noh<CR>
+
+" C-k to delete the buffer.  Done with this file, bye!
 nnoremap <silent> <C-k> :bdel<CR>
+
+" Backspace to toggle between two most recent buffers.  Love it.
 nnoremap <BS> <C-^>
 
+" Select the last thing pasted (for reindent, for example)
+nnoremap gV `[v`]
+
 vnoremap . :norm.<CR>
+
+" Don't leave visual mode when shifting!
+vnoremap < <gv
+vnoremap > >gv
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
