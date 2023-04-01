@@ -169,10 +169,6 @@ nnoremap gV `[v`]
 
 vnoremap . :norm.<CR>
 
-" Don't leave visual mode when shifting!
-vnoremap < <gv
-vnoremap > >gv
-
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 " cnoremap <expr> <cr> getcmdtype() == ':' ? "\n:noh\n" : "\n"
