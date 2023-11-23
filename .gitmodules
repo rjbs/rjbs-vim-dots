@@ -28,6 +28,7 @@
 [submodule ".vim/bundle/vim-perl"]
 	path = .vim/pack/github/start/vim-perl
 	url = https://github.com/vim-perl/vim-perl
+	branch = dev
 [submodule ".vim/bundle/vim-repeat"]
 	path = .vim/pack/github/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat
