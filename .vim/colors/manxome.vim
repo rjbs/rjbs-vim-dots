@@ -37,6 +37,13 @@ highlight Ignore    ctermfg=0 ctermbg=none  cterm=bold  guifg=#aaaaaa guibg=#000
 highlight Error     ctermfg=1 ctermbg=none  cterm=bold  guibg=#ff0000 guibg=#000000 gui=none
 highlight Todo      ctermfg=1 ctermbg=none  cterm=bold  guifg=#aa0000 guibg=#000000 gui=none
 
+"" stuff added for ALE
+highlight SignColumn      ctermfg=225 ctermbg=236
+highlight ALEWarningSign  ctermfg=214 ctermbg=236
+highlight ALEErrorSign    ctermfg=160 ctermbg=236
+highlight ALEWarning      ctermfg=7   ctermbg=130
+highlight ALEError        ctermfg=7   ctermbg=124
+
 " set syntax-specific groups
 " I'd like to avoid using these, but the default settings for these two are
 " just no good.  Seeing italic text in Vim is just plain wrong.
