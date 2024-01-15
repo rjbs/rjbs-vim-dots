@@ -54,5 +54,5 @@ if v:version >= 700
   highlight TabLineSel  ctermbg=4 ctermfg=7 cterm=bold
   highlight TabLineFill ctermbg=4 ctermfg=7 cterm=none
 
-  highlight ColorColumn ctermbg=235 guibg=#2c2d27
+  highlight ColorColumn ctermbg=233 guibg=#2c2d27
 endif
