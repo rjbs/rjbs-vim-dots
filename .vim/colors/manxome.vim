@@ -44,7 +44,7 @@ hi Todo             ctermfg=208 ctermbg=none  cterm=bold  guifg=#aa0000 guibg=#0
 
 hi Boolean          ctermfg=79  ctermbg=none  cterm=bold
 hi Label            ctermfg=190 ctermbg=none  cterm=bold
-hi Number           ctermfg=148 ctermbg=none  cterm=bold
+hi Number           ctermfg=117 ctermbg=none  cterm=bold
 
 "" stuff added for ALE
 hi SignColumn       ctermfg=225 ctermbg=236
@@ -61,6 +61,7 @@ hi htmlBold         ctermfg=7   ctermbg=none  cterm=bold  guifg=#ffffff guibg=#0
 hi htmlItalic       ctermfg=5   ctermbg=none  cterm=bold  guifg=#ff00ff guibg=#000000 gui=none
 
 hi javaScriptParens ctermfg=6   ctermbg=none  cterm=bold  guifg=#00ffff guibg=#000000 gui=none
+hi jsonKeyword      ctermfg=7   ctermbg=none  cterm=bold
 
 if v:version >= 700
   hi CursorColumn               ctermbg=4     cterm=none
