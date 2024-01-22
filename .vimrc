@@ -238,3 +238,10 @@ nnoremap <silent> <C-]> :ALEGoToDefinition<CR>
 
 " Not sure about this. -- rjbs, 2024-01-15
 " let g:ale_sign_column_always = 1
+
+function! SynGroup()
+  let l:s = synID(line('.'), col('.'), 1)
+  echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
+endfun
+
+nnoremap <silent> gs :call SynGroup()<CR>
