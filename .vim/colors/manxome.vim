@@ -35,7 +35,16 @@ highlight Special   ctermfg=7 ctermbg=none  cterm=bold  guifg=#ffffff guibg=#000
 highlight Underlined  ctermfg=2 ctermbg=none  cterm=none  guifg=#00aa00 guibg=#000000 gui=none
 highlight Ignore    ctermfg=0 ctermbg=none  cterm=bold  guifg=#aaaaaa guibg=#000000 gui=none
 highlight Error     ctermfg=1 ctermbg=none  cterm=bold  guibg=#ff0000 guibg=#000000 gui=none
-highlight Todo      ctermfg=1 ctermbg=none  cterm=bold  guifg=#aa0000 guibg=#000000 gui=none
+highlight Todo      ctermfg=208 ctermbg=none  cterm=bold  guifg=#aa0000 guibg=#000000 gui=none
+
+" DEFAULT:
+" Constant-like:    Boolean, Character, Number (and Float), String
+" Identifier-like:  Function
+" Statement-like:   Conditional, Exception, Keyword, Label, Operator, Repeat
+
+highlight Boolean         ctermfg=79  ctermbg=none cterm=bold
+highlight Label           ctermfg=190 ctermbg=none cterm=bold
+highlight Number          ctermfg=148 ctermbg=none cterm=bold
 
 "" stuff added for ALE
 highlight SignColumn      ctermfg=225 ctermbg=236
