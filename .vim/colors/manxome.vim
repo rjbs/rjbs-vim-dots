@@ -63,6 +63,9 @@ hi htmlItalic       ctermfg=5   ctermbg=none  cterm=bold  guifg=#ff00ff guibg=#0
 hi javaScriptParens ctermfg=6   ctermbg=none  cterm=bold  guifg=#00ffff guibg=#000000 gui=none
 hi jsonKeyword      ctermfg=7   ctermbg=none  cterm=bold
 
+hi perlFatal        ctermfg=214 ctermbg=none
+hi perlReturn       ctermfg=84  ctermbg=none
+
 if v:version >= 700
   hi CursorColumn               ctermbg=4     cterm=none
   hi CursorLine                 ctermbg=4     cterm=none
