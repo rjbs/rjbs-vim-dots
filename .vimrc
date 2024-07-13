@@ -39,7 +39,6 @@ set laststatus=2         " always show status line
 set listchars=tab:>-,eol:¬,trail:␠,extends:…,precedes:…,nbsp:␠
 set path=.,$HOME,,       " for editing with :find
 set pastetoggle=<F2>     " F2 to toggle paste
-set popt=paper:letter,number:y,left:5pc " print options!
 set ruler                " display cursor position
 set showcmd              " show command-in-progress
 set shortmess=at         " shortens messages to avoid 'press a key' prompt
@@ -53,6 +52,11 @@ set wildignore+=*/CVS/   " don't try to descend into CVS directories
 set wildmenu             " enable menu of completions
 set wildmode=longest:full,full " complete only as much as is common,
                                " then show menu
+
+" Print options!  We set all margins to 0 because we're going to pipe this
+" through "mpage -2" which will put pairs of pages on one, and will apply the
+" margin there.
+set printoptions=paper:letter,number:y,top:0c,right:0pc,bottom:0pc,left:0pc
 
 filetype off
 
