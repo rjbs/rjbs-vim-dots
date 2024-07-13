@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+use v5.20.0;
+use warnings;
+
+my $ps_file     = $ARGV[0];
+my $output_name = ($ARGV[1] // "print-job") =~ s/\.ps\z//gr =~ s/\A\.//gr;
+my $output_path = "/Users/rjbs/Desktop/$output_name.pdf";
+
+unless ($ps_file) {
+  die "only Vim should run this; usage: vim-print-helper PSFILE\n";
+}
+
+unless (-e -r $ps_file) {
+  die "only Vim should run this; input file does not exist\n";
+}
+
+open(my $mpage, '-|', 'mpage', '-2', '-bLetter', '-S', $ps_file)
+  || die "can't open pipe from mpage";
+
+my @ps_lines = <$mpage>;
+
+close $mpage or die "problem with mpage, exited nonzero\n";
+
+open(my $ps2pdf, '|-', 'ps2pdf', '-', $output_path)
+  || die "can't open pipe to ps2pdf";
+
+for my $line (@ps_lines) {
+  $ps2pdf->print($line)
+    || die "error printing to ps2pdf\n";
+}
+
+close $ps2pdf or die "problem with ps2pdf, exited nonzero\n";
+
+system("open", $output_path);

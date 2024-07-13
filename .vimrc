@@ -39,7 +39,7 @@ set laststatus=2         " always show status line
 set listchars=tab:>-,eol:¬,trail:␠,extends:…,precedes:…,nbsp:␠
 set path=.,$HOME,,       " for editing with :find
 set pastetoggle=<F2>     " F2 to toggle paste
-set popt=paper:letter    " better default paper size for my purposes
+set popt=paper:letter,number:y,left:5pc " print options!
 set ruler                " display cursor position
 set showcmd              " show command-in-progress
 set shortmess=at         " shortens messages to avoid 'press a key' prompt
@@ -245,3 +245,12 @@ function! SynGroup()
 endfun
 
 nnoremap <silent> gs :call SynGroup()<CR>
+
+set printexpr=ByzantinePrintFile()
+function ByzantinePrintFile()
+  call system("/Users/rjbs/bin/libexec/vim-print-helper " .. v:fname_in .. " " .. shellescape(expand('%:t')))
+  call delete("v:fname_in")
+  return v:shell_error
+endfunc
+
+let g:ale_perl_perlcritic_options = "-4"
