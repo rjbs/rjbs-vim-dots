@@ -252,7 +252,11 @@ nnoremap <silent> gs :call SynGroup()<CR>
 
 set printexpr=ByzantinePrintFile()
 function ByzantinePrintFile()
-  call system("/Users/rjbs/bin/libexec/vim-print-helper " .. v:fname_in .. " " .. shellescape(expand('%:t')))
+  call system("/Users/rjbs/bin/libexec/vim-print-helper "
+    \.. v:fname_in
+    \.. " "
+    \.. shellescape(expand('%:t'))
+  \)
   call delete("v:fname_in")
   return v:shell_error
 endfunc
