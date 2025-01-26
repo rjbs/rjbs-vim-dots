@@ -15,7 +15,6 @@ set autoindent           " carry over indenting from previous line
 set backspace=2          " allow backspace beyond insertion point
 set background=dark      " console bg is dark
 set cinkeys-=0#          " don't unindent cpp stuff (perl comments!)
-set clipboard+=unnamed   " put yanks/etc on the clipboard
 set comments=b://,b:#,b:* " by default allow JS and "unixy" comments, *-lists
 set copyindent           " make autoindent use the same characters to indent
 set directory-=.         " don't store temp files in cwd
