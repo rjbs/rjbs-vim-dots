@@ -3,7 +3,8 @@ use v5.20.0;
 use warnings;
 
 my $ps_file     = $ARGV[0];
-my $output_name = ($ARGV[1] // "print-job") =~ s/\.ps\z//gr =~ s/\A\.//gr;
+my $output_name = ($ARGV[1] // "") =~ s/\.ps\z//gr =~ s/\A\.//gr;
+   $output_name = "print-job" unless length $output_name;
 my $output_path = "/Users/rjbs/Desktop/$output_name.pdf";
 
 unless ($ps_file) {
