@@ -176,11 +176,17 @@ highlight EOLWS ctermbg=red guibg=red
 nnoremap <Leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
 function MaybeOpenLinear()
+  " 1. mark our current position
+  " 2. yank the WORD in which the cursor sits
+  " 3. jump back to the cusor position (because yiW jumps to start of WORD)
   normal ml
   normal "lyiW
   normal `l
 
+  " Often we will have "ABC-123: Do a thing".  The WORD will have included the
+  " colon, so let's remove it.
   let l:word = substitute(getreg('l'), ':', '', '')
+
   if match(l:word, '\c[A-Z]\{3,4\}-[0-9]\+') > -1
     echo(l:word)
     if has('macunix')
