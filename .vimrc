@@ -117,9 +117,6 @@ endif
 " silent call system("perl -e0 -MVi::QuickFix=silent")
 let perl_synwrite_qf = 1
 
-" see changes
-" diffthis | vs | enew | set buftype=nofile | r # | 1d |  diffthis
-
 iabbr --r -- rjbs, <C-R>=strftime("%Y-%m-%d")<CR>
 iabbr rnstar Rob N ★
 
