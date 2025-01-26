@@ -68,9 +68,6 @@ syntax on                   " enable syntax highlighting
 if has("win32")
   let Tlist_Ctags_Cmd='C:\Progra~1\ctags\ctags.exe'
   nnoremap <M-Space> :simalt ~<CR>
-elseif has("macunix")
-  " the Carbon clipboard is screwed up, and messes up newlines
-  set cb=
 endif
 
 " exec'd because ... could it work otherwise?
