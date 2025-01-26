@@ -141,8 +141,6 @@ let g:ctrlp_match_window_reversed = 0
 
 let g:vim_json_syntax_conceal = 0
 
-let g:rust_recommended_style = 0
-
 " C-c to clear the highlight, which is good for when you just seached, say, a
 " single space!
 nnoremap <silent> <C-c> :noh<CR>
@@ -216,8 +214,6 @@ vnoremap <C-v> <Plug>(expand_region_shrink)
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
 let &colorcolumn=join(range(81,999),",")
-
-let g:rust_recommended_style = 0
 
 "" ALE-related configuration
 let g:ale_virtualtext_cursor = 'current'
