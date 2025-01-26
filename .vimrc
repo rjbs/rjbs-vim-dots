@@ -148,6 +148,8 @@ nnoremap <BS> <C-^>
 " Select the last thing pasted (for reindent, for example)
 nnoremap gV `[v`]
 
+" When there's a visual selection, make "." redo the same command you did last,
+" just like it does in normal mode.
 vnoremap . :norm.<CR>
 
 cnoremap <C-p> <Up>
@@ -156,15 +158,19 @@ cnoremap <C-n> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
+" ←/→ to flip through the buffers, in order.
 nnoremap <silent> <Left>  :bprev<CR>
 nnoremap <silent> <Right> :bnext<CR>
 
+" Map %% in the command line to current path.  This is great for "I want to
+" make another file in the same path as this one."
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
 autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
 highlight EOLWS ctermbg=red guibg=red
 
+" Map \w to "remove all trailing whitespace"
 " TODO: have this put the cursor back where you started -- rjbs, 2015-07-12
 " TODO: do not correct "-- " sigdashes -- rjbs, 2015-07-17
 nnoremap <Leader>w :%s/\s\+$//<CR>:let @/=''<CR>
@@ -206,6 +212,8 @@ vnoremap <C-v> <Plug>(expand_region_shrink)
 " http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
+" Color all the columns after 80 (i.e., ones I want to not use) very slightly
+" greyer than black, so I can see the right margin.
 let &colorcolumn=join(range(81,999),",")
 
 "" ALE-related configuration
@@ -222,6 +230,8 @@ function! SynGroup()
   echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfun
 
+" Show the syntax group being used to highlight the text under the cursor.
+" This is useful when editing syntax definitions or color schemes.
 nnoremap <silent> gs :call SynGroup()<CR>
 
 set printexpr=ByzantinePrintFile()
