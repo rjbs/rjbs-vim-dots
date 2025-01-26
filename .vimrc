@@ -236,7 +236,7 @@ let g:rust_recommended_style = 0
 let g:ale_virtualtext_cursor = 'current'
 let g:ale_sign_warning = '○'
 let g:ale_sign_error = '●'
-nnoremap <silent> <C-]> :ALEGoToDefinition<CR>
+" nnoremap <silent> <C-]> :ALEGoToDefinition<CR>
 
 " Not sure about this. -- rjbs, 2024-01-15
 " let g:ale_sign_column_always = 1
