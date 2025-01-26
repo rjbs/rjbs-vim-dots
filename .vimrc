@@ -175,16 +175,6 @@ highlight EOLWS ctermbg=red guibg=red
 " TODO: do not correct "-- " sigdashes -- rjbs, 2015-07-17
 nnoremap <Leader>w :%s/\s\+$//<CR>:let @/=''<CR>
 
-" From http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
-vnoremap <Leader>y "+y
-vnoremap <Leader>d "+d
-nnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-vnoremap <Leader>p "+p
-vnoremap <Leader>P "+P
-
 function MaybeOpenLinear()
   normal ml
   normal "lyiW
