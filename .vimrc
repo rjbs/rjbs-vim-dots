@@ -60,8 +60,6 @@ set printoptions=paper:letter,number:y,top:0c,right:0pc,bottom:0pc,left:0pc
 
 filetype off
 
-execute pathogen#infect()
-
 colorscheme manxome         " use my phat color scheme
 filetype plugin on          " use ftplugins, mostly for those in ~
 runtime macros/matchit.vim  " pulled from macros dir to avoid requiring install
