@@ -132,7 +132,6 @@ if v:version >= 700
 endif
 
 let mapleader="\\"
-nnoremap <leader>u :silent GundoToggle<CR>
 nnoremap <leader>ev :edit   ~/.../src/rjbs-vim-dots/.vimrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 

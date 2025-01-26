@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/pack/github/start/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim
-[submodule ".vim/bundle/gundo.vim"]
-	path = .vim/pack/github/start/gundo.vim
-	url = https://github.com/sjl/gundo.vim/
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree
