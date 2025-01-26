@@ -114,9 +114,9 @@ let perl_synwrite_qf = 1
 iabbr --r -- rjbs, <C-R>=strftime("%Y-%m-%d")<CR>
 iabbr rnstar Rob N ★
 
-dig xx 9792
-dig xy 9794
-dig x? 9893
+dig xx 9792 " ♀
+dig xy 9794 " ♂
+dig x? 9893 " ⚥
 
 " version 7 things
 if v:version >= 700
@@ -152,7 +152,6 @@ vnoremap . :norm.<CR>
 
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-" cnoremap <expr> <cr> getcmdtype() == ':' ? "\n:noh\n" : "\n"
 
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
