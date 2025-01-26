@@ -67,12 +67,6 @@ syntax on                   " enable syntax highlighting
 " exec'd because ... could it work otherwise?
 exec "set titleold=" . matchstr(hostname(), "^[^.]\\+")
 
-""" use a UTF-8 term if you can
-
-if $TERM_PROGRAM == "Apple_Terminal"
-  set tenc=utf-8
-endif
-
 """ use fonts that don't make my eyes bleed
 
 if has("gui_running")
