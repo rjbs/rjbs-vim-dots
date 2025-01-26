@@ -64,11 +64,6 @@ filetype plugin on          " use ftplugins, mostly for those in ~
 runtime macros/matchit.vim  " pulled from macros dir to avoid requiring install
 syntax on                   " enable syntax highlighting
 
-if has("win32")
-  let Tlist_Ctags_Cmd='C:\Progra~1\ctags\ctags.exe'
-  nnoremap <M-Space> :simalt ~<CR>
-endif
-
 " exec'd because ... could it work otherwise?
 exec "set titleold=" . matchstr(hostname(), "^[^.]\\+")
 
