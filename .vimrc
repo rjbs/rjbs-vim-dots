@@ -27,7 +27,7 @@ let g:fzf_colors = { }
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] }
 
-nnoremap <silent> <C-p> :FZF --reverse --style=default<CR>
+nnoremap <silent> <C-p> :FZF --reverse --style=default --scheme=path<CR>
 
 if ! filereadable(expand('~/.vim/colors/manxome.vim'))
   if ! isdirectory(expand('~/.vim/colors'))
