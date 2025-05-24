@@ -8,8 +8,7 @@ elseif filereadable('/usr/share/doc/fzf/examples/fzf.vim')
 endif
 
 let g:fzf_layout = {
-\   'window': { 'width': 1.0, 'height': 0.8,
-\   'yoffset': 0.0 }
+\   'window': { 'width': 1.0, 'height': 0.8, 'yoffset': 0.2 }
 \ }
 " 
 let g:fzf_colors = { }
@@ -28,7 +27,7 @@ let g:fzf_colors = { }
 "   \ 'spinner': ['fg', 'Label'],
 "   \ 'header':  ['fg', 'Comment'] }
 
-nnoremap <silent> <C-p> :FZF<CR>
+nnoremap <silent> <C-p> :FZF --reverse<CR>
 
 if ! filereadable(expand('~/.vim/colors/manxome.vim'))
   if ! isdirectory(expand('~/.vim/colors'))
