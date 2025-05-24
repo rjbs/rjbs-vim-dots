@@ -1,6 +1,35 @@
 """ rjbs: Ricardo SIGNES
 """ vimrc
 
+if filereadable('/opt/homebrew/opt/fzf/plugin/fzf.vim')
+  source /opt/homebrew/opt/fzf/plugin/fzf.vim
+elseif filereadable('/usr/share/doc/fzf/examples/fzf.vim')
+  source /usr/share/doc/fzf/examples/fzf.vim
+endif
+
+let g:fzf_layout = {
+\   'window': { 'width': 1.0, 'height': 0.8,
+\   'yoffset': 0.0 }
+\ }
+" 
+let g:fzf_colors = { }
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'query':   ['fg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
+nnoremap <silent> <C-p> :FZF<CR>
+
 if ! filereadable(expand('~/.vim/colors/manxome.vim'))
   if ! isdirectory(expand('~/.vim/colors'))
     call mkdir(expand('~/.vim/colors'))
