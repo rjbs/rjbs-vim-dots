@@ -39,10 +39,6 @@ what.
   comment out text, supporting many file types.  `gcc` does the current line,
   but it also supports visual mode and the usual text objects.
 
-* [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim): Ctrl-P brings up a fuzzy
-  file finder.  Some day I will try the other fuzzy file finders.  This one has
-  been very good for me for ages.
-
 * [expand-region](https://github.com/terryma/vim-expand-region) adds a means to
   grow or shrink the visual selection.  For me, tap `v` to grow and `C-v` to
   shrink the selection.
